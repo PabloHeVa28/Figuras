@@ -1,0 +1,253 @@
+Figura Ate;
+Figura Mariana;
+Figura Rec;
+Figura Pent; 
+Figura Hex;
+Figura Hep;
+Figura Circ;
+Figura Oct;
+ArrayList <Figura> Figuras;
+
+//triangulo,cuadrado,rectangulo,pentagono,hexagono,heptagono,octagono
+ 
+void setup(){
+  size (400,400);
+  
+  Ate =new Triangulo(25,50,25,25,25,25,25);
+  Mariana = new Cuadrado(70,50,25);
+  Rec = new Rectangulo(115,30,40,20);
+  Circ = new Circulo(190,35,30,5);
+  Pent = new Pentagono(225,50,20,5);
+  Hex= new Hexagono(275,50,20,5);
+  Hep = new Heptagono (25,105,30,5);
+  Oct = new Octagono(75,65,40,5);
+  
+  Figuras = new ArrayList <Figura>();
+  Figuras.add(Ate);
+  Figuras.add(Mariana);
+   
+}
+
+void draw(){
+  println(Ate.perimetro());
+  println(Mariana.perimetro());
+  println(Rec.perimetro());
+  println(Pent.perimetro());
+  println(Hex.perimetro());
+  println(Hep.perimetro());
+  println(Circ.perimetro());
+  println(Oct.perimetro());
+    
+ }
+
+
+interface Figura {
+  float perimetro();
+  float area();
+}
+
+ class Triangulo implements Figura{
+   int x,y,b,h,l1,l2,l3;
+ Triangulo(int x_,int y_, int b_, int h_,int l1_,int l2_,int l3_){
+   x=x_;
+   y=y_;
+   b=b_;
+   h=h_;
+   l1=l1_;
+   l2=l2_;
+   l3=l3_;
+}
+   float perimetro(){
+      beginShape();
+    vertex(x,y);
+    vertex(x+b,y-l1);
+    vertex(x+l1,y);
+    vertex(x,y);
+    endShape();
+   return l1+l2+l3; 
+   }
+   float area(){
+   return b*h/2;
+   }
+  
+ }
+ 
+ class Cuadrado implements Figura{
+  Cuadrado (int x_, int y_,int l_){
+    x=x_;
+    y=y_;
+    l=l_;
+  }
+   int x,y,l;
+   float perimetro(){
+        beginShape();
+   vertex(x,y);
+   vertex(x+l,y);
+   vertex(x+l,y-l);
+   vertex(x,y-l);
+   vertex(x,y);
+   endShape();
+  return l*4;
+  }
+  float area(){
+  return l^2;
+  }
+ }
+ 
+ 
+ class Rectangulo implements Figura{
+   int x,y,b,h ;
+   Rectangulo (int x_, int y_, int b_, int h_){
+     x= x_;
+     y=y_;
+     b=b_;
+    h=h_;
+  }
+  float perimetro(){
+  beginShape();
+   vertex(x,y);
+   vertex(x+b,y);
+   vertex(x+b,y+h);
+   vertex(x,y+h);
+   vertex(x,y);
+      endShape();
+return (b*2)+(h*2);  
+}
+  float area(){
+  return b*h;
+  }
+ void display(){
+ }
+ }
+ 
+ 
+ class Pentagono implements Figura{
+   int x,y,l,a ;
+   Pentagono (int x_, int y_, int l_, int a_){
+   x=x_;
+   y=y_;
+   l=l_;
+   a=a_;
+  }
+  float perimetro(){
+    beginShape();
+    vertex(x,y);
+    vertex(x+l,y);
+    vertex(x+l+7,y-l);
+    vertex(x+l/2,(y-l-12));
+    vertex(x-7,y-l);
+    vertex(x,y);
+    endShape();
+  return l*5;
+  }
+  float area(){
+  return (perimetro()*a)/2;
+  }
+  void display(){
+ }
+ }
+ 
+ class Hexagono implements Figura{
+   int x,y,l,a ;
+   Hexagono (int x_,int y_,int l_, int a_){
+    x=x_;
+    y=y_;
+    l=l_;
+    a=a_;
+  }
+  float perimetro(){
+  beginShape();
+    vertex(x,y);
+    vertex(x+l,y);
+    vertex(x+l+10,y-l);
+    vertex(x+l,y-(l*2));
+    vertex(x,(y-l*2));
+    vertex(x-10,y-l);
+    vertex(x,y);
+   endShape();
+    return l*6;
+  }
+  float area(){
+  return (perimetro()*a)/2;
+  }
+ void display(){
+ }
+ }
+ 
+  class Heptagono implements Figura{
+   int x,y,l,a ;
+   Heptagono (int x_,int y_,int l_, int a_){
+    x=x_;
+    y=y_;    
+    l=l_;
+    a=a_;
+  }
+  float perimetro(){
+      beginShape();
+    vertex(x,y);
+    vertex(x+l/2,y);
+    vertex(x+l/2+13,y-l/2);
+    //vertex(x+l-6,y-l-10);
+    vertex(x+l-6,y-l);
+      vertex(x+(l/2)-5,y-l-10);
+    vertex(x-6,y-l);
+    vertex(x-13,y-l/2);
+    vertex(x,y);
+   endShape();
+  return l*7;
+  }
+  float area(){
+  return (perimetro()*a)/2;
+}
+  void display(){
+ }
+ }
+ 
+   class Octagono implements Figura{
+   int x,y,l,a ;
+   Octagono (int x_,int y_,int l_, int a_){
+    x=x_;
+    y=y_; 
+    l=l_;
+    a=a_;
+  }
+  float perimetro(){
+   noStroke();
+    rect(x,y,l/2,l);
+  rect(x-l/4,y+l/4,l,l/2);
+ 
+  pushMatrix();
+  translate(93,y);
+  rotate(radians(45));
+  rect(0,0,l/2,l);
+  rect(0-l/4,0+l/4,l,l/2);
+  popMatrix();
+    return l*8;
+  }
+  float area(){
+  return (perimetro()*a)/2;
+  }
+ void display(){
+ }
+ }
+ 
+  class Circulo implements Figura{
+   float x,y,d,r ;
+   Circulo (int x_, int y_,int d_, int r_){
+    x=x_;
+    y=y_;
+     d=d_;
+    r=r_;
+  }
+  float perimetro(){
+   ellipse(x,y,d,d);
+    
+    return PI*d;
+  }
+  float area(){
+  return (PI*(r*r))/2;
+  }
+ void display(){
+ }
+ }
+  
